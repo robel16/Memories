@@ -14,10 +14,14 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
+
+  //google sign
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
   };
+
+  //google signout
   const logOut = () => {
     signOut(auth);
   };
@@ -25,27 +29,9 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      console.log(currentUser);
 
-      console.log(currentUser.displayName);
-
-      localStorage.setItem("user", JSON.stringify(currentUser));
-
-      const { displayName, uid, photoURL } = currentUser;
-
-      const doc = {
-        _id: uid,
-
-        _type: "user",
-        userName: displayName,
-
-        image: photoURL,
-      };
-      client.createIfNotExists(doc).then(() => {
-        navigate("/", {
-          replace: true,
-        });
-      });
+     
+      
     });
 
     return () => {
