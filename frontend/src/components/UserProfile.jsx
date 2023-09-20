@@ -1,9 +1,9 @@
 import React from 'react'
 
-function UserProfiel() {
+function UserProfile(UserProfile) {
   return (
-    <div>UserProfiel</div>
+    <div>UserProfile</div>
   )
 }
 
-export default UserProfiel
+export default UserProfile
